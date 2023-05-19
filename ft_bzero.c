@@ -3,24 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dstarov <dstarov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytro <dmytro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:38:08 by dstarov           #+#    #+#             */
-/*   Updated: 2023/02/05 16:46:23 by dstarov          ###   ########.fr       */
+/*   Updated: 2023/05/19 22:40:29 by dmytro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* fills an array with '/0' according to a given pointer and specified lenght */
 #include "libft.h"
 
-void	*ft_bzero(void *adr, size_t len)
+/* simply uses ft_memset to perform transformation */
+void	ft_bzero(void *adr, size_t len)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		((char *)adr)[i] = '\0';
-		i++;
-	}
-	return (adr);
+	ft_memset(adr, '\0', len);
 }
