@@ -6,11 +6,11 @@
 /*   By: dmytro <dmytro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:36:20 by dstarov           #+#    #+#             */
-/*   Updated: 2023/06/09 22:36:58 by dmytro           ###   ########.fr       */
+/*   Updated: 2023/06/10 13:18:52 by dmytro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ft_atoi takes number in a form of string, remove whitespace characters from
+/* Takes number in a form of string, remove whitespace characters from
  * its beginning and returns it as integer
  *
  * Parameters:
