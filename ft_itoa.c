@@ -3,94 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dstarov <dstarov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytro <dmytro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:07:27 by dmytro            #+#    #+#             */
-/*   Updated: 2023/02/24 18:30:58 by dstarov          ###   ########.fr       */
+/*   Updated: 2023/06/18 18:01:35 by dmytro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-
-int	count_depth(int n)
+/* VERSION 2.0
+ * This function transforms given number as integer into a string
+ *
+ * Parameters:
+ * - n: the integer to be transformed.
+ * 
+ * Return:
+ * - new string with a given number followed by string-terminating
+ * character.
+ * - NULL if memory allocation failed.
+ */
+int	n_dept(int n)
 {
-	int	d;
+	size_t	dept;
 
-	d = 0;
+	dept = 0;
+	if (n <= 0)
+		dept++;
 	while (n != 0)
 	{
 		n = n / 10;
-		d++;
+		dept++;
 	}
-	return (d);
-}
-
-char	*n_is_zero(int n)
-{
-	char	*s;
-
-	if (n == 0)
-	{
-		s = malloc(sizeof(char) * 2);
-		if (!s)
-			return (NULL);
-		s[0] = '0';
-		s[1] = '\0';
-		return (s);
-	}
-	return (NULL);
-}
-
-char	*neg_val(int n)
-{
-	char			*s;
-	int				len;
-	unsigned int	un;	
-
-	un = n * (-1);
-	len = 1;
-	len = len + count_depth(un);
-	s = malloc(sizeof(char) * (len + 1));
-	if (!s)
-		return (NULL);
-	s[len] = '\0';
-	s[0] = '-';
-	while (un > 0)
-	{
-		len--;
-		s[len] = (char)(un % 10 + 48);
-		un = un / 10;
-	}
-	return (s);
-}
-
-char	*pos_val(int n)
-{
-	char	*s;
-	int		len;
-
-	len = 0;
-	len = len + count_depth(n);
-	s = malloc(sizeof(char) * (len + 1));
-	if (!s)
-		return (NULL);
-	s[len] = '\0';
-	while (n > 0)
-	{
-		len--;
-		s[len] = (char)(n % 10 + 48);
-		n = n / 10;
-	}
-	return (s);
+	return (dept);
 }
 
 char	*ft_itoa(int n)
 {
-	if (n == 0)
-		return (n_is_zero(n));
-	else if (n < 0)
-		return (neg_val(n));
+	size_t			n_len;
+	unsigned int	n_tmp;
+	char			*n_str;
+
+	n_len = n_dept(n);
+	n_str = malloc(sizeof(char) * (n_len + 1));
+	if (!n_str)
+		return (NULL);
+	n_str[n_len] = '\0';
+	if (n < 0)
+	{
+		n_str[0] = '-';
+		n_tmp = -n;
+	}
 	else
-		return (pos_val(n));
+		n_tmp = n;
+	while (n_tmp / 10 != 0)
+	{
+		n_str[--n_len] = n_tmp % 10 + '0';
+		n_tmp = n_tmp / 10;
+	}
+	n_str[--n_len] = n_tmp % 10 + '0';
+	return (n_str);
 }
